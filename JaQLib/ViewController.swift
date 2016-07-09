@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-
+import Alamofire
 
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
     
@@ -52,7 +52,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
         let objCaptureMetadataOutput = AVCaptureMetadataOutput()
         objCaptureSession?.addOutput(objCaptureMetadataOutput)
         objCaptureMetadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-        objCaptureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+        objCaptureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code]
     }
     
     func addVideoPreviewLayer()
@@ -83,13 +83,24 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
             return
         }
         let objMetadataMachineReadableCodeObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        if objMetadataMachineReadableCodeObject.type == AVMetadataObjectTypeQRCode {
+        if objMetadataMachineReadableCodeObject.type == AVMetadataObjectTypeEAN13Code {
             let objBarCode = objCaptureVideoPreviewLayer?.transformedMetadataObjectForMetadataObject(objMetadataMachineReadableCodeObject as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
             vwQRCode?.frame = objBarCode.bounds;
             if objMetadataMachineReadableCodeObject.stringValue != nil {
                 lblQRCodeResult.text = objMetadataMachineReadableCodeObject.stringValue
-                let alertView:UIAlertView = UIAlertView(title: "URL", message:objMetadataMachineReadableCodeObject.stringValue, delegate: nil, cancelButtonTitle: "OK")
+                let alertView:UIAlertView = UIAlertView(title: "ISBNコード", message:objMetadataMachineReadableCodeObject.stringValue, delegate: nil, cancelButtonTitle: "OK")
                 alertView.show()
+                
+                // APIリクエスト
+                let domain = "https://localhost:3000/api/"
+                let isbn = "?isbn=" + objMetadataMachineReadableCodeObject.stringValue
+                let user = "3&user_id=1"
+                
+                //Alamofire.request(.GET, "https://polls.apiblueprint.org/questions")
+                Alamofire.request(.GET, domain + isbn + user)
+                    .responseJSON { response in
+                        print(response.result.value)
+                }
                 
                 // 停止
                 objCaptureSession?.stopRunning()

@@ -13,7 +13,26 @@
 		CEB8FA751D30B92200778066 /* JaQLib.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEB8FA731D30B92200778066 /* JaQLib.xcdatamodeld */; };
 		CEB8FA771D30B92200778066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB8FA761D30B92200778066 /* Assets.xcassets */; };
 		CEB8FA7A1D30B92200778066 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB8FA781D30B92200778066 /* LaunchScreen.storyboard */; };
+		CEB8FA851D30E6A200778066 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8FA831D30E6A200778066 /* Alamofire.framework */; };
+		CEB8FA861D30E6A200778066 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8FA831D30E6A200778066 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEB8FA871D30E6A200778066 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8FA841D30E6A200778066 /* SwiftyJSON.framework */; };
+		CEB8FA881D30E6A200778066 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEB8FA841D30E6A200778066 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEB8FA891D30E6A300778066 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEB8FA881D30E6A200778066 /* SwiftyJSON.framework in Embed Frameworks */,
+				CEB8FA861D30E6A200778066 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CEB8FA691D30B92200778066 /* JaQLib.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JaQLib.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +43,8 @@
 		CEB8FA761D30B92200778066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB8FA791D30B92200778066 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEB8FA7B1D30B92200778066 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEB8FA831D30E6A200778066 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		CEB8FA841D30E6A200778066 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB8FA871D30E6A200778066 /* SwiftyJSON.framework in Frameworks */,
+				CEB8FA851D30E6A200778066 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +63,8 @@
 		CEB8FA601D30B92200778066 = {
 			isa = PBXGroup;
 			children = (
+				CEB8FA831D30E6A200778066 /* Alamofire.framework */,
+				CEB8FA841D30E6A200778066 /* SwiftyJSON.framework */,
 				CEB8FA6B1D30B92200778066 /* JaQLib */,
 				CEB8FA6A1D30B92200778066 /* Products */,
 			);
@@ -77,6 +102,8 @@
 				CEB8FA651D30B92200778066 /* Sources */,
 				CEB8FA661D30B92200778066 /* Frameworks */,
 				CEB8FA671D30B92200778066 /* Resources */,
+				CEB8FA891D30E6A300778066 /* Embed Frameworks */,
+				CEB8FA8A1D30E6AD00778066 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -133,6 +160,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CEB8FA8A1D30E6AD00778066 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CEB8FA651D30B92200778066 /* Sources */ = {
@@ -256,6 +301,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JaQLib/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.moku2.JaQLib;
@@ -270,6 +319,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JaQLib/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.moku2.JaQLib;
